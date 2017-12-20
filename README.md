@@ -1,25 +1,4 @@
 [![Waffle.io - Columns and their card count](https://badge.waffle.io/notmarkmiranda/seven.png?columns=all)](https://waffle.io/notmarkmiranda/seven?utm_source=badge)
-# README
+# Version 0.7.0 - aka SEVEN
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
-
-Things you may want to cover:
-
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+I don't know if starting over this time, or continuing on six is the right call, but I'll try to move quickly and keep issues updated.
