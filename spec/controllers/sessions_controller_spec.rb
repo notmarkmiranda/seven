@@ -29,4 +29,12 @@ describe SessionsController, type: :controller do
       expect(response).to render_template :new
     end
   end
+
+  context 'GET#destroy' do
+    it 'redirects to root path - log out' do
+      get :destroy, session: { user_id: user.id }
+
+      expect(response).to redirect_to root_path
+    end
+  end
 end

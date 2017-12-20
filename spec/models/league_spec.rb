@@ -12,5 +12,13 @@ describe League, type: :model do
     it { should belong_to :creator }
   end
 
-  context 'methods'
+  context 'methods' do
+    let(:league) { create(:league, name: 'marks league') }
+
+    context '#to_param' do
+      it 'reuturns slug' do
+        expect(league.slug).to eq('marks-league')
+      end
+    end
+  end
 end

@@ -1,5 +1,5 @@
 class SessionsController < ApplicationController
-  before_action :redirect_logged_in_user
+  before_action :redirect_logged_in_user, except: [:destroy]
 
   def new
   end
