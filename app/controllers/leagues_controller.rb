@@ -38,6 +38,6 @@ class LeaguesController < ApplicationController
   private
 
   def league_params
-    params.require(:league).permit(:name, :user_id)
+    params.require(:league).permit(:name, :user_id, :privated)
   end
 end
