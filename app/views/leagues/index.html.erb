@@ -1,0 +1,9 @@
+<% if @leagues.empty? %>
+  There are no public leagues! <%= link_to 'Create one', new_league_path %> to get started.
+<% else %>
+  <ul>
+  <% @leagues.each do |league| %>
+    <li><%= league.name %></li>
+  <% end %>
+  </ul>
+<% end %>

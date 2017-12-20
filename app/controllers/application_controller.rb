@@ -3,6 +3,7 @@ class ApplicationController < ActionController::Base
 
   helper_method :current_user
   helper_method :redirect_logged_in_user
+  helper_method :redirect_visitors
 
   private
 
@@ -12,5 +13,9 @@ class ApplicationController < ActionController::Base
 
   def redirect_logged_in_user
     redirect_to dashboard_path if current_user
+  end
+
+  def redirect_visitors
+    # redirect_to sign_in_path unless current_user
   end
 end
