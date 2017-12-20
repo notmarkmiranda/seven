@@ -2,7 +2,6 @@ class UsersController < ApplicationController
   before_action :redirect_logged_in_user, only: [:new]
 
   def show
-    @user = current_user
   end
 
   def new
