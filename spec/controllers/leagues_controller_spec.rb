@@ -29,7 +29,11 @@ describe LeaguesController, type: :controller do
       expect(response).to render_template :new
     end
 
-    it 'redirects a visitor to the sign in path'
+    it 'redirects a visitor to the sign in path' do
+      get :new
+
+      expect(response).to redirect_to sign_in_path
+    end
   end
 
   context 'POST#create' do
@@ -46,7 +50,11 @@ describe LeaguesController, type: :controller do
       expect(response).to render_template :new
     end
 
-    it 'redirects a visitor to the sign in path'
+    it 'redirects a visitor to the sign in path' do
+      post :create, params: { league: attrs.except(:name) }
+
+      expect(response).to redirect_to sign_in_path
+    end
   end
 
   context 'GET#edit' do
@@ -56,7 +64,12 @@ describe LeaguesController, type: :controller do
       expect(response).to render_template :edit
     end
 
-    it 'redirects a visitor to the sign in path'
+    it 'redirects a visitor to the sign in path' do
+      get :edit, params: { slug: league.slug }
+
+      expect(response).to redirect_to sign_in_path
+    end
+
     it 'redirects a non-admin to the dashboard path'
   end
 
@@ -73,7 +86,12 @@ describe LeaguesController, type: :controller do
       expect(response).to render_template :edit
     end
 
-    it 'redirects a visitor to the sign up path'
+    it 'redirects a visitor to the sign up path' do
+      patch :update, params: { slug: league.slug, league: { name: '' } }
+
+      expect(response).to redirect_to sign_in_path
+    end
+
     it 'redirects a non-admin to the dashboard path'
   end
 end

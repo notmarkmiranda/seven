@@ -1,5 +1,5 @@
 class LeaguesController < ApplicationController
-  before_action :redirect_visitors
+  before_action :redirect_visitors, except: [:index, :show]
 
   def index
     @leagues = League.all
