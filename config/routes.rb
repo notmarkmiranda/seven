@@ -1,3 +1,10 @@
 Rails.application.routes.draw do
-  # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
+  resources :users, only: [:index, :show]
+  get   '/sign-up', to: 'users#new', as: 'sign_up'
+  post  '/sign-up', to: 'users#create'
+
+  get   '/edit-profile', to: 'users#edit', as: 'edit_profile'
+  patch '/edit-profile', to: 'users#update'
+
+  get   '/dashboard', to: 'users#show', as: 'dashboard'
 end
