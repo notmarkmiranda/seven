@@ -12,6 +12,7 @@ describe League, type: :model do
     it { should belong_to :creator }
     it { should have_many :user_league_roles }
     it { should have_many :users }
+    it { should have_many :seasons }
   end
 
   context 'methods' do
