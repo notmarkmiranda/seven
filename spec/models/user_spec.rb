@@ -9,6 +9,8 @@ describe User, type: :model do
   end
 
   context 'relationships' do
+    it { should have_many :created_leagues }
+    it { should have_many :user_league_roles }
     it { should have_many :leagues }
   end
 

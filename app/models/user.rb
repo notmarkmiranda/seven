@@ -6,5 +6,7 @@ class User < ApplicationRecord
   validates :first_name, presence: true
   validates :last_name, presence: true
 
-  has_many :leagues
+  has_many :created_leagues, class_name: 'League', foreign_key: 'user_id'
+  has_many :user_league_roles
+  has_many :leagues, through: :user_league_roles
 end

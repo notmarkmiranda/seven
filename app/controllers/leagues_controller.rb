@@ -14,8 +14,9 @@ class LeaguesController < ApplicationController
   end
 
   def create
-    @league = current_user.leagues.new(league_params)
-    if @league.save
+    @league = current_user.created_leagues.new(league_params)
+    league_creator = LeagueCreator.new(@league)
+    if league_creator.save
       redirect_to @league
     else
       render :new

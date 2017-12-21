@@ -10,6 +10,8 @@ describe League, type: :model do
 
   context 'relationships' do
     it { should belong_to :creator }
+    it { should have_many :user_league_roles }
+    it { should have_many :users }
   end
 
   context 'methods' do
