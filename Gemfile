@@ -17,6 +17,7 @@ gem 'coffee-rails', '~> 4.2'
 gem 'jbuilder', '~> 2.5'
 gem 'bcrypt'
 gem 'figaro'
+gem 'coveralls', require: false
 
 group :development, :test do
   gem 'factory_bot_rails'
