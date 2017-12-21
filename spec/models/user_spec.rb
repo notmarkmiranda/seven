@@ -14,5 +14,41 @@ describe User, type: :model do
     it { should have_many :leagues }
   end
 
-  context 'methods'
+  context 'methods' do
+    let(:league) { create(:league) }
+    let(:admin) { league.creator }
+    let(:user) { create(:user) }
+    let(:member) do
+      league.grant_membership(user)
+      user
+    end
+
+    context '#admin?(league)' do
+      it 'returns true' do
+        expect(admin.admin?(league)).to be true
+      end
+
+      it 'returns false - member' do
+        expect(member.admin?(league)).to be false
+      end
+
+      it 'returns false - user' do
+        expect(user.admin?(league)).to be false
+      end
+    end
+
+    context 'not_admin?(league)' do
+      it 'returns true - member' do
+        expect(member.not_admin?(league)).to be true
+      end
+
+      it 'returns true - user' do
+        expect(user.not_admin?(league)).to be true
+      end
+
+      it 'returns false' do
+        expect(admin.not_admin?(league)).to be false
+      end
+    end
+  end
 end

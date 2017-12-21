@@ -1,8 +1,10 @@
-<%= f.label :name, 'League Name' %>
-<%= f.text_field :name %>
-<%= f.radio_button :privated, '0', checked: @league.privated? %>
-<%= f.label :privated_yes, 'No' %>
-<%= f.radio_button :privated, '1', checked: @league.privated? %>
-<%= f.label :privated_yes, 'Yes' %>
+<%= form_for @league do |f| %>
+  <%= f.label :name, 'League Name' %>
+  <%= f.text_field :name %>
+  <%= f.radio_button :privated, '0', checked: @league.privated? %>
+  <%= f.label :privated_yes, 'No' %>
+  <%= f.radio_button :privated, '1', checked: @league.privated? %>
+  <%= f.label :privated_yes, 'Yes' %>
 
-<%= f.submit button_text %>
+  <%= f.submit button_text %>
+<% end %>

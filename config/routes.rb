@@ -2,7 +2,9 @@ Rails.application.routes.draw do
   root 'pages#index'
   resources :users, only: [:index, :show]
   resources :leagues, except: [:delete], param: :slug do
-    resources :seasons, except: [:new, :edit, :destroy]
+    resources :seasons, except: [:new, :edit, :destroy] do
+      resources :games
+    end
   end
 
   get   '/sign-up', to: 'users#new', as: 'sign_up'

@@ -1,5 +1,8 @@
 class LeaguesController < ApplicationController
+  include LeagueHelper
+
   before_action :redirect_visitors, except: [:index, :show]
+  before_action :verify_admin_for_league, only: [:edit, :update]
 
   def index
     @leagues = League.all
@@ -15,8 +18,8 @@ class LeaguesController < ApplicationController
 
   def create
     @league = current_user.created_leagues.new(league_params)
-    league_creator = LeagueCreator.new(@league)
-    if league_creator.save
+    # league_creator = LeagueCreator.new(@league)
+    if @league.save
       redirect_to @league
     else
       render :new
