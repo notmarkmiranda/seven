@@ -3,13 +3,15 @@ require 'rails_helper'
 describe 'Admin can edit a league', type: :feature do
   let(:league) { create(:league) }
   let(:admin) { league.creator }
+  let(:user) { create(:user) }
+  let(:member) do
+    league.grant_membership(user)
+    user
+  end
 
   context 'admin' do
-    before do
-      allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(admin)
-    end
-
     it 'redirects to league path - successful update' do
+      stub_current_user(admin)
       visit edit_league_path(league)
 
       fill_in 'League Name', with: 'Marks Terrible League'
@@ -29,6 +31,18 @@ describe 'Admin can edit a league', type: :feature do
   end
 
   context 'member/non-admin' do
-    it 'redirects to dashboard'
+    it 'redirects to dashboard - user' do
+      stub_current_user(user)
+      visit edit_league_path(league)
+
+      expect(current_path).to eq(dashboard_path)
+    end
+
+    it 'redirects to dashboard - member' do
+      stub_current_user(member)
+      visit edit_league_path(league)
+
+      expect(current_path).to eq(dashboard_path)
+    end
   end
 end

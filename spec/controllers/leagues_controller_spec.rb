@@ -4,6 +4,11 @@ describe LeaguesController, type: :controller do
   let(:user) { create(:user) }
   let(:league) { create(:league) }
   let(:admin) { league.creator }
+  let(:user) { create(:user) }
+  let(:member) do
+    league.grant_membership(user)
+    user
+  end
   let(:attrs) { attributes_for(:league) }
 
   context 'GET#index' do
@@ -70,7 +75,17 @@ describe LeaguesController, type: :controller do
       expect(response).to redirect_to sign_in_path
     end
 
-    it 'redirects a non-admin to the dashboard path'
+    it 'redirects to dashboard path - user' do
+      get :edit, session: { user_id: user.id }, params: { slug: league.slug }
+
+      expect(response).to redirect_to dashboard_path
+    end
+
+    it 'redirects to dashboard path - member' do
+      get :edit, session: { user_id: member.id }, params: { slug: league.slug }
+
+      expect(response).to redirect_to dashboard_path
+    end
   end
 
   context 'PATCH#update' do
@@ -92,6 +107,16 @@ describe LeaguesController, type: :controller do
       expect(response).to redirect_to sign_in_path
     end
 
-    it 'redirects a non-admin to the dashboard path'
+    it 'redirects to dashboard path - member' do
+      patch :update, session: { user_id: member.id }, params: { slug: league.slug, league: { name: '' } }
+
+      expect(response).to redirect_to dashboard_path
+    end
+
+    it 'redirects to dashboard path - user' do
+      patch :update, session: { user_id: user.id }, params: { slug: league.slug, league: { name: '' } }
+
+      expect(response).to redirect_to dashboard_path
+    end
   end
 end

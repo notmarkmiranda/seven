@@ -1,3 +1,1 @@
-<%= form_for @user, url: sign_up_path do |f| %>
-  <%= render partial: 'form_fields', locals: { button_text: 'Sign Up', f: f } %>
-<% end %>
+<%= render partial: 'form_fields', locals: { button_text: 'Sign Up', action_path: sign_up_path } %>

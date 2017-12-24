@@ -10,10 +10,21 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171221152741) do
+ActiveRecord::Schema.define(version: 20171221225741) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "games", force: :cascade do |t|
+    t.date "date"
+    t.integer "buy_in"
+    t.boolean "completed"
+    t.bigint "season_id"
+    t.integer "attendees"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["season_id"], name: "index_games_on_season_id"
+  end
 
   create_table "leagues", force: :cascade do |t|
     t.string "name"
@@ -55,6 +66,7 @@ ActiveRecord::Schema.define(version: 20171221152741) do
     t.index ["token"], name: "index_users_on_token", unique: true
   end
 
+  add_foreign_key "games", "seasons"
   add_foreign_key "leagues", "users"
   add_foreign_key "seasons", "leagues"
   add_foreign_key "user_league_roles", "leagues"

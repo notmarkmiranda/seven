@@ -1,3 +1,1 @@
-<%= form_for @user, url: edit_profile_path do |f| %>
-  <%= render partial: 'form_fields', locals: { button_text: 'Update Profile', f: f } %>
-<% end %>
+<%= render partial: 'form_fields', locals: { button_text: 'Update Profile', action_path: edit_profile_path } %>
