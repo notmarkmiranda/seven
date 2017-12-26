@@ -9,12 +9,17 @@ class User < ApplicationRecord
   has_many :created_leagues, class_name: 'League', foreign_key: 'user_id'
   has_many :user_league_roles
   has_many :leagues, through: :user_league_roles
-
-  def not_admin?(league)
-    !admin?(league)
-  end
+  has_many :players
 
   def admin?(league)
     leagues.merge(UserLeagueRole.admins).include?(league)
+  end
+
+  def full_name
+    "#{first_name} #{last_name}"
+  end
+
+  def not_admin?(league)
+    !admin?(league)
   end
 end

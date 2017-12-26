@@ -1,0 +1,10 @@
+<%= render partial: 'form' %>
+
+<% if @game.no_players? %>
+  No players yet.
+<% end %>
+
+<% @game.players.each do |player| %>
+  <%= player.user_full_name %>
+  <%= "Additional Expense: #{number_to_currency(player.additional_expense)}" %>
+<% end %>
