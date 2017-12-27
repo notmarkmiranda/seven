@@ -4,6 +4,9 @@ Rails.application.routes.draw do
   resources :leagues, except: [:delete], param: :slug do
     resources :seasons, except: [:new, :edit, :destroy] do
       resources :games, except: [:destroy] do
+        resource :completed, only: [:update]
+        resource :uncompleted, only: [:update]
+
         resources :players, except: [:destroy]
       end
     end
