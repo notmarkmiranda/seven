@@ -12,12 +12,13 @@ describe User, type: :model do
     it { should have_many :created_leagues }
     it { should have_many :user_league_roles }
     it { should have_many :leagues }
+    it { should have_many :players }
   end
 
   context 'methods' do
     let(:league) { create(:league) }
     let(:admin) { league.creator }
-    let(:user) { create(:user) }
+    let(:user) { create(:user, first_name: 'Mark', last_name: 'Miranda') }
     let(:member) do
       league.grant_membership(user)
       user
@@ -34,6 +35,12 @@ describe User, type: :model do
 
       it 'returns false - user' do
         expect(user.admin?(league)).to be false
+      end
+    end
+
+    context '#full_name' do
+      it 'returns the full name of a player' do
+        expect(user.full_name).to eq('Mark Miranda')
       end
     end
 

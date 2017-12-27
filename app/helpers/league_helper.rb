@@ -13,6 +13,10 @@ module LeagueHelper
     @game ||= Game.find(game_param)
   end
 
+  def player
+    @player ||= Player.find(player_param)
+  end
+
   def load_league
     league
   end
@@ -25,6 +29,11 @@ module LeagueHelper
   def load_game
     load_season
     game
+  end
+
+  def load_player
+    load_game
+    player
   end
 
   def verify_admin_for_league
@@ -44,5 +53,9 @@ module LeagueHelper
 
   def game_param
     controller_name == 'games' ? params[:id] : params[:game_id]
+  end
+
+  def player_param
+    controller_name == 'players' ? params[:id] : params[:player_id]
   end
 end
