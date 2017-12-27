@@ -7,10 +7,26 @@ describe CompletedsController, type: :controller do
     let(:admin)  { league.creator }
     let(:params) { { league_slug: league.slug, season_id: game.season.id, game_id: game.id } }
 
-    it 'changes completed from false to true' do
+    it 'changes completed from false to true with multiple players' do
+      create_list(:player, 2, game: game)
       expect {
         patch :update, session: { user_id: admin.id }, params: params
       }.to change { game.reload.completed }.from(false).to(true)
+      expect(response).to redirect_to league_season_game_path(league, game.season, game)
+    end
+
+    it 'doesnt change completed with 0 players' do
+      expect {
+        patch :update, session: { user_id: admin.id }, params: params
+      }.to_not change { game.reload.completed }.from(false)
+      expect(response).to redirect_to league_season_game_path(league, game.season, game)
+    end
+
+    it 'doesnt change completed with 1 player' do
+      create(:player, game: game)
+      expect {
+        patch :update, session: { user_id: admin.id }, params: params
+      }.to_not change { game.reload.completed }.from(false)
       expect(response).to redirect_to league_season_game_path(league, game.season, game)
     end
 

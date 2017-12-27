@@ -50,5 +50,23 @@ describe Game, type: :model do
         expect(game.no_players?).to be false
       end
     end
+
+    context '#scorable?' do
+      it 'returns true' do
+        create_list(:player, 2, game: game)
+
+        expect(game.scorable?).to be true
+      end
+
+      it 'returns false - for 0' do
+        expect(game.scorable?).to be false
+      end
+
+      it 'returns false - for 1' do
+        create(:player, game: game)
+
+        expect(game.scorable?).to be false
+      end
+    end
   end
 end

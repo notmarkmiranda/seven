@@ -5,7 +5,7 @@ class CompletedsController < ApplicationController
   before_action :load_game
 
 	def update
-    @game.update(completed: true)
+    @game.update(completed: true) if @game.scorable?
     redirect_to league_season_game_path(league, season, @game)
 	end
 end

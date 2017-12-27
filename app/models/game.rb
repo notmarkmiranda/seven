@@ -19,4 +19,12 @@ class Game < ApplicationRecord
   def no_players?
     players.empty?
   end
+
+  def players_count
+    players.count
+  end
+
+  def scorable?
+    players_count > 1
+  end
 end
