@@ -16,12 +16,21 @@ class League < ApplicationRecord
     users.merge(UserLeagueRole.admins)
   end
 
+  def grant_adminship(user)
+    add_person(user, 1)
+  end
+
   def grant_membership(user)
     add_person(user, 0)
   end
 
   def members
     users.merge(UserLeagueRole.members)
+  end
+
+  def send_invitation(user)
+    user_league_roles.find_by(user_id: user).update(invited: true)
+    # future logic for sending mailer
   end
 
   def to_param

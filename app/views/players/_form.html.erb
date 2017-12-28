@@ -1,6 +1,7 @@
 <%= form_for [@league, @season, @game, @player] do |f| %>
   <%= f.label :user_id, 'Player Name' %>
   <%= f.select :user_id, @game.all_possible_players.collect { |user| [user.full_name, user.id] }  %>
+  <%= link_to_if current_page?(action: 'new'), 'Add a Player', new_league_users_path(@league, game_id: @game.id) %>
   <%= f.label :additional_expense, 'Additional Expense' %>
   <%= f.text_field :additional_expense %>
 

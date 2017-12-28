@@ -11,6 +11,9 @@ class User < ApplicationRecord
   has_many :leagues, through: :user_league_roles
   has_many :players
 
+  accepts_nested_attributes_for :players
+  accepts_nested_attributes_for :user_league_roles
+
   def admin?(league)
     leagues.merge(UserLeagueRole.admins).include?(league)
   end

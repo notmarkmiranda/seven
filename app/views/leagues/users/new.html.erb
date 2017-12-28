@@ -1,0 +1,22 @@
+<%= form_for [@league, @user] do |f| %>
+  <%= f.label :email, 'Email Address' %>
+  <%= f.text_field :email %>
+  <%= f.label :first_name, 'First Name' %>
+  <%= f.text_field :first_name %>
+  <%= f.label :last_name, 'Last Name' %>
+  <%= f.text_field :last_name %>
+
+  <%= f.fields_for :player do |player_fields| %>
+    <%= player_fields.label :additional_expense, 'Additional Expense' %>
+    <%= player_fields.text_field :additional_expense %>
+  <% end %>
+
+  <%= f.fields_for :user_league_role do |ulr_fields| %>
+    <%= ulr_fields.label :invited, 'Send E-Mail Invite?' %>
+    <%= ulr_fields.check_box :invited, id: 'invite_user' %>
+    <%= ulr_fields.label :admin, 'Create as Admin?' %>
+    <%= ulr_fields.check_box :admin, id: 'admin' %>
+  <% end %>
+  <%= f.submit 'Just Save Player' %>
+  <%= f.submit 'Save and Finish Player', name: 'save_and_finish' %>
+<% end %>
