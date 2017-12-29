@@ -12,9 +12,8 @@ class Leagues::UsersController < ApplicationController
   def create
     @user = User.new(filtered_user_params)
     league_user = LeagueUserPlayerCreator.new(user: @user, league: league, params: other_params, game_id: session[:game_id], save_and_finish: params[:save_and_finish])
-    if league_user.save
-      redirect_to new_league_season_game_player_path(league, current_game.season, current_game)
-    end
+    league_user.save
+    redirect_to new_league_season_game_player_path(league, current_game.season, current_game)
   end
 
   private

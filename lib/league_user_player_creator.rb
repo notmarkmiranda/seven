@@ -31,6 +31,7 @@ class LeagueUserPlayerCreator
         finished_at: Time.current)
     ) if save_and_finish
   end
+
   def grant_member_or_admin
     ulr_params[:admin] == '1' ? league.grant_adminship(user) : league.grant_membership(user)
   end

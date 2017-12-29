@@ -44,6 +44,20 @@ describe League, type: :model do
       end
     end
 
+    context '#grant_adminship' do
+      it 'adds a ULR after granting membership' do
+        league.grant_adminship(user)
+        expect(league.admins).to match_array([admin, user])
+      end
+
+      it 'removes an admin after granting membership' do
+        league.grant_adminship(member)
+
+        expect(league.members).to eq([])
+        expect(league.admins).to match_array([admin, member])
+      end
+    end
+
     context '#grant_membership' do
       it 'adds a ULR after granting membership' do
         league.grant_membership(user)
@@ -67,7 +81,16 @@ describe League, type: :model do
       it 'returns an empty array if there are no members' do
         expect(league.members).to eq([])
       end
+    end
 
+    context '#send_invitation' do
+      it 'changes the invited attribute' do
+        ulr = UserLeagueRole.find_by(league_id: league.id, user_id: member.id)
+
+        expect {
+          league.send_invitation(member)
+        }.to change { ulr.reload.invited }.from(false).to(true)
+      end
     end
 
     context '#to_param' do
